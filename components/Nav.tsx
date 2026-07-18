@@ -21,12 +21,24 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // entrance
-    gsap.fromTo(
-      bar.current,
-      { yPercent: -120, opacity: 0 },
-      { yPercent: 0, opacity: 1, duration: 1, ease: "expo.out", delay: 2.4 }
-    );
+    // entrance — plays once the lamp is switched on, hides again when off
+    gsap.set(bar.current, { yPercent: -120, opacity: 0 });
+    const reveal = () =>
+      gsap.to(bar.current, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "expo.out",
+      });
+    const hide = () =>
+      gsap.to(bar.current, {
+        yPercent: -120,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.in",
+      });
+    window.addEventListener("lamp:on", reveal);
+    window.addEventListener("lamp:off", hide);
 
     // scroll progress bar
     const st = ScrollTrigger.create({
@@ -37,7 +49,11 @@ export default function Nav() {
           progress.current.style.transform = `scaleX(${self.progress})`;
       },
     });
-    return () => st.kill();
+    return () => {
+      st.kill();
+      window.removeEventListener("lamp:on", reveal);
+      window.removeEventListener("lamp:off", hide);
+    };
   }, []);
 
   return (

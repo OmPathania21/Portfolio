@@ -10,13 +10,17 @@ export default function Hero() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    let reveal: (() => void) | null = null;
+    let resetTl: (() => void) | null = null;
+
     const ctx = gsap.context(() => {
       const chars = gsap.utils.toArray<HTMLElement>("[data-hchar]");
       gsap.set(chars, { yPercent: 120 });
       gsap.set(".hero-fade", { opacity: 0, y: 20 });
       gsap.set(".hero-glow", { scale: 0.6, opacity: 0 });
 
-      const tl = gsap.timeline({ delay: 2.5 });
+      // built paused — plays when the lamp is switched on
+      const tl = gsap.timeline({ paused: true });
       tl.to(".hero-glow", { scale: 1, opacity: 1, duration: 1.6, ease: "power2.out" })
         .to(
           chars,
@@ -41,9 +45,18 @@ export default function Hero() {
           scrub: true,
         },
       });
+
+      reveal = () => tl.play();
+      resetTl = () => tl.pause(0);
+      window.addEventListener("lamp:on", reveal);
+      window.addEventListener("lamp:off", resetTl);
     }, root);
 
-    return () => ctx.revert();
+    return () => {
+      if (reveal) window.removeEventListener("lamp:on", reveal);
+      if (resetTl) window.removeEventListener("lamp:off", resetTl);
+      ctx.revert();
+    };
   }, []);
 
   const line1 = "Om";

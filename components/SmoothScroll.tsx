@@ -24,6 +24,9 @@ export default function SmoothScroll({
       smoothWheel: true,
     });
 
+    // Expose so the lamp gate can lock/unlock scrolling.
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+
     lenis.on("scroll", ScrollTrigger.update);
 
     const raf = (time: number) => {
@@ -52,6 +55,7 @@ export default function SmoothScroll({
       document.removeEventListener("click", onClick);
       gsap.ticker.remove(raf);
       lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 

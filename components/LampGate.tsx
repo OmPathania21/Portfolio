@@ -257,8 +257,8 @@ export default function LampGate() {
       />
 
       {/* ---------------- LEFT: table + table lamp ---------------- */}
-      <div className="relative z-10 flex min-h-[48svh] w-full items-end justify-center pb-6 md:min-h-0 md:w-1/2 md:pb-16">
-        <div className="relative origin-bottom scale-[0.72] sm:scale-90 md:scale-100">
+      <div className="relative z-10 flex min-h-[52svh] w-full items-center justify-center py-8 md:min-h-0 md:w-1/2">
+        <div className="relative origin-center scale-90 sm:scale-105 md:scale-[1.2]">
           {/* fixed-size scene so the pull-chain lines up with the SVG socket */}
           <div className="relative" style={{ width: 300, height: 400 }}>
             <svg

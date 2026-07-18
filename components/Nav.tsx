@@ -48,9 +48,9 @@ export default function Nav() {
         <div className="container-editorial flex items-center justify-between py-5">
           <a
             href="#top"
-            className="font-serif text-lg tracking-tight text-paper"
+            className="font-serif text-lg tracking-tight text-content"
           >
-            Om<span className="text-gold">.</span>
+            Om<span className="text-accent">.</span>
           </a>
 
           <nav className="hidden items-center gap-9 md:flex">
@@ -58,10 +58,10 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="group relative font-sans text-sm text-paper-soft transition-colors hover:text-paper"
+                className="group relative font-sans text-sm text-content-soft transition-colors hover:text-content"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -69,7 +69,7 @@ export default function Nav() {
           <Magnetic className="hidden md:inline-block">
             <a
               href="#contact"
-              className="rounded-full border hairline px-5 py-2 font-sans text-sm text-paper transition-colors hover:bg-paper hover:text-ink"
+              className="rounded-full border hairline px-5 py-2 font-sans text-sm text-content transition-colors hover:bg-content hover:text-surface"
             >
               Let’s talk
             </a>
@@ -81,22 +81,22 @@ export default function Nav() {
             className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
           >
             <span
-              className={`h-px w-6 bg-paper transition-transform duration-300 ${
+              className={`h-px w-6 bg-content transition-transform duration-300 ${
                 open ? "translate-y-[3.5px] rotate-45" : ""
               }`}
             />
             <span
-              className={`h-px w-6 bg-paper transition-transform duration-300 ${
+              className={`h-px w-6 bg-content transition-transform duration-300 ${
                 open ? "-translate-y-[3.5px] -rotate-45" : ""
               }`}
             />
           </button>
         </div>
         <div className="container-editorial">
-          <div className="h-px w-full bg-paper/10">
+          <div className="h-px w-full bg-content/10">
             <div
               ref={progress}
-              className="h-px w-full origin-left scale-x-0 bg-gold"
+              className="h-px w-full origin-left scale-x-0 bg-accent"
             />
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function Nav() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-[899] flex flex-col items-center justify-center gap-8 bg-ink-800 transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-[899] flex flex-col items-center justify-center gap-8 bg-surface-800 transition-all duration-500 md:hidden ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -115,7 +115,7 @@ export default function Nav() {
             key={l.href}
             href={l.href}
             onClick={() => setOpen(false)}
-            className="font-serif text-4xl text-paper"
+            className="font-serif text-4xl text-content"
           >
             {l.label}
           </a>

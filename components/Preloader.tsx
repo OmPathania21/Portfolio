@@ -54,28 +54,28 @@ export default function Preloader() {
   return (
     <div
       ref={root}
-      className="fixed inset-0 z-[10000] flex flex-col justify-between bg-ink px-6 py-8 md:px-12 md:py-12"
+      className="fixed inset-0 z-[10000] flex flex-col justify-between bg-surface px-6 py-8 md:px-12 md:py-12"
     >
-      <div className="flex items-start justify-between font-sans text-xs uppercase tracking-[0.3em] text-paper-dim">
+      <div className="flex items-start justify-between font-sans text-xs uppercase tracking-[0.3em] text-content-dim">
         <span>Om Pathania</span>
         <span>Portfolio ’26</span>
       </div>
 
       <div className="overflow-hidden">
-        <div className="pl-word font-serif text-[15vw] font-light leading-none text-paper md:text-[10vw]">
+        <div className="pl-word font-serif text-[15vw] font-light leading-none text-content md:text-[10vw]">
           Crafting
         </div>
       </div>
 
       <div className="flex items-end justify-between">
         <div className="overflow-hidden">
-          <div className="pl-word font-serif text-[15vw] font-light italic leading-none text-gold md:text-[10vw]">
+          <div className="pl-word font-serif text-[15vw] font-light italic leading-none text-accent md:text-[10vw]">
             software.
           </div>
         </div>
         <span
           ref={countRef}
-          className="font-sans text-2xl tabular-nums text-paper-dim md:text-4xl"
+          className="font-sans text-2xl tabular-nums text-content-dim md:text-4xl"
         >
           00
         </span>

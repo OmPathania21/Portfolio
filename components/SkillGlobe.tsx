@@ -139,17 +139,17 @@ export default function SkillGlobe() {
     <section id="toolkit" className="container-editorial py-28 md:py-40">
       <div className="mb-16 grid gap-6 md:grid-cols-12 md:items-end">
         <div className="md:col-span-8">
-          <p className="mb-6 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.3em] text-paper-dim">
-            <span className="h-px w-8 bg-gold" />
+          <p className="mb-6 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.3em] text-content-dim">
+            <span className="h-px w-8 bg-accent" />
             The Toolkit
           </p>
           <SplitReveal
             text="A world of tools"
             as="h2"
-            className="font-serif text-5xl font-light leading-none text-paper md:text-8xl"
+            className="font-serif text-5xl font-light leading-none text-content md:text-8xl"
           />
         </div>
-        <p className="font-sans text-sm text-paper-dim md:col-span-4">
+        <p className="font-sans text-sm text-content-dim md:col-span-4">
           Everything I build with — orbiting in one place. Hover any point to
           see what it is. Move your cursor to steer the globe.
         </p>
@@ -168,16 +168,16 @@ export default function SkillGlobe() {
               viewBox="0 0 100 100"
               aria-hidden="true"
             >
-              <circle cx="50" cy="50" r="42" className="stroke-gold/25" strokeWidth="0.15" fill="none" />
-              <ellipse cx="50" cy="50" rx="42" ry="15" className="stroke-paper/10" strokeWidth="0.15" fill="none" />
-              <ellipse cx="50" cy="50" rx="15" ry="42" className="stroke-paper/10" strokeWidth="0.15" fill="none" />
+              <circle cx="50" cy="50" r="42" className="stroke-accent/25" strokeWidth="0.15" fill="none" />
+              <ellipse cx="50" cy="50" rx="42" ry="15" className="stroke-content/10" strokeWidth="0.15" fill="none" />
+              <ellipse cx="50" cy="50" rx="15" ry="42" className="stroke-content/10" strokeWidth="0.15" fill="none" />
             </svg>
             {/* center glow */}
             <div
               className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(201,169,106,0.14), transparent 70%)",
+                  "radial-gradient(circle, rgba(96,165,250,0.20), transparent 70%)",
                 filter: "blur(12px)",
               }}
             />
@@ -196,8 +196,8 @@ export default function SkillGlobe() {
                   onBlur={() => setActive(null)}
                   className={`absolute left-0 top-0 whitespace-nowrap rounded-full border px-3 py-1 font-sans text-sm transition-colors duration-200 will-change-transform ${
                     active === i
-                      ? "border-gold bg-gold text-ink"
-                      : "border-paper/15 bg-ink-800/60 text-paper-soft hover:text-paper"
+                      ? "border-accent bg-accent text-surface"
+                      : "border-content/15 bg-surface-800/60 text-content-soft hover:text-content"
                   }`}
                   style={{ backdropFilter: "blur(2px)" }}
                 >
@@ -208,20 +208,20 @@ export default function SkillGlobe() {
               {/* tooltip */}
               <div
                 ref={tip}
-                className={`pointer-events-none absolute left-0 top-0 z-[300] w-52 rounded-xl border border-gold/30 bg-ink-800/95 p-4 transition-opacity duration-200 ${
+                className={`pointer-events-none absolute left-0 top-0 z-[300] w-52 rounded-xl border border-accent/30 bg-surface-800/95 p-4 transition-opacity duration-200 ${
                   active !== null ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ backdropFilter: "blur(8px)" }}
               >
                 {active !== null && (
                   <>
-                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold">
+                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-accent">
                       {globeSkills[active].category}
                     </p>
-                    <p className="mt-1 font-serif text-xl font-light text-paper">
+                    <p className="mt-1 font-serif text-xl font-light text-content">
                       {globeSkills[active].name}
                     </p>
-                    <p className="mt-1 font-sans text-xs leading-snug text-paper-dim">
+                    <p className="mt-1 font-sans text-xs leading-snug text-content-dim">
                       {globeSkills[active].note}
                     </p>
                   </>
@@ -233,20 +233,20 @@ export default function SkillGlobe() {
 
         {/* Legend / categories */}
         <div className="md:col-span-4">
-          <p className="mb-5 font-sans text-xs uppercase tracking-[0.2em] text-paper-dim">
+          <p className="mb-5 font-sans text-xs uppercase tracking-[0.2em] text-content-dim">
             Categories
           </p>
           <div className="flex flex-wrap gap-2">
             {categories.map((c) => (
               <span
                 key={c}
-                className="rounded-full border border-paper/12 px-4 py-2 font-sans text-sm text-paper-soft"
+                className="rounded-full border border-content/12 px-4 py-2 font-sans text-sm text-content-soft"
               >
                 {c}
               </span>
             ))}
           </div>
-          <p className="mt-8 font-sans text-sm leading-relaxed text-paper-dim">
+          <p className="mt-8 font-sans text-sm leading-relaxed text-content-dim">
             {globeSkills.length} tools and counting — the palette I reach for when
             turning ideas into working software.
           </p>

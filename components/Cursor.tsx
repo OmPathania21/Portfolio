@@ -27,9 +27,9 @@ export default function Cursor() {
     };
 
     const grow = () =>
-      gsap.to(ring, { scale: 2.4, borderColor: "#C9A96A", duration: 0.3 });
+      gsap.to(ring, { scale: 2.4, borderColor: "#2563EB", duration: 0.3 });
     const shrink = () =>
-      gsap.to(ring, { scale: 1, borderColor: "rgba(199,193,179,0.4)", duration: 0.3 });
+      gsap.to(ring, { scale: 1, borderColor: "rgba(15,30,56,0.35)", duration: 0.3 });
 
     window.addEventListener("mousemove", move);
 
@@ -55,11 +55,11 @@ export default function Cursor() {
       <div
         ref={ringRef}
         className="absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border"
-        style={{ borderColor: "rgba(199,193,179,0.4)" }}
+        style={{ borderColor: "rgba(15,30,56,0.35)" }}
       />
       <div
         ref={dotRef}
-        className="absolute left-0 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold"
+        className="absolute left-0 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
       />
     </div>
   );

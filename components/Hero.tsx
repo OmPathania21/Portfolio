@@ -54,7 +54,7 @@ export default function Hero() {
       <span key={i} className="reveal-line" style={{ display: "inline-block" }}>
         <span
           data-hchar
-          className={accent ? "italic text-gold" : ""}
+          className={accent ? "italic text-accent" : ""}
           style={{ display: "inline-block", willChange: "transform" }}
         >
           {c}
@@ -73,20 +73,20 @@ export default function Hero() {
         className="hero-glow pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[70vw] w-[70vw] -translate-x-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(201,169,106,0.22) 0%, rgba(201,169,106,0.06) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(96,165,250,0.28) 0%, rgba(37,99,235,0.10) 40%, transparent 70%)",
           filter: "blur(20px)",
         }}
       />
 
       <div className="container-editorial">
-        <div className="hero-fade flex items-center gap-3 font-sans text-xs uppercase tracking-[0.3em] text-paper-dim">
-          <span className="h-px w-8 bg-gold" />
+        <div className="hero-fade flex items-center gap-3 font-sans text-xs uppercase tracking-[0.3em] text-content-dim">
+          <span className="h-px w-8 bg-accent" />
           {profile.role}
         </div>
       </div>
 
       <div className="container-editorial">
-        <h1 className="hero-title font-serif font-light leading-[0.85] tracking-tightest text-paper">
+        <h1 className="hero-title font-serif font-light leading-[0.85] tracking-tightest text-content">
           <span className="block overflow-hidden text-[22vw] md:text-[16vw] lg:text-[15rem]">
             {renderChars(line1)}
           </span>
@@ -98,12 +98,12 @@ export default function Hero() {
 
       <div className="container-editorial">
         <div className="flex flex-col gap-8 border-t hairline pt-8 md:flex-row md:items-end md:justify-between">
-          <p className="hero-fade max-w-md font-sans text-base leading-relaxed text-paper-soft md:text-lg">
+          <p className="hero-fade max-w-md font-sans text-base leading-relaxed text-content-soft md:text-lg">
             {profile.tagline}
           </p>
-          <div className="hero-fade flex items-center gap-6 font-sans text-sm text-paper-dim">
+          <div className="hero-fade flex items-center gap-6 font-sans text-sm text-content-dim">
             <span>{profile.location}</span>
-            <a href="#work" className="group flex items-center gap-2 text-paper">
+            <a href="#work" className="group flex items-center gap-2 text-content">
               Scroll
               <span className="inline-block transition-transform group-hover:translate-y-1">
                 ↓

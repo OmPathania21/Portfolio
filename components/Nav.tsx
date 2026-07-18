@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Magnetic } from "./anim";
+import ThemeToggle from "./ThemeToggle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,20 +67,25 @@ export default function Nav() {
             ))}
           </nav>
 
-          <Magnetic className="hidden md:inline-block">
-            <a
-              href="#contact"
-              className="rounded-full border hairline px-5 py-2 font-sans text-sm text-content transition-colors hover:bg-content hover:text-surface"
-            >
-              Let’s talk
-            </a>
-          </Magnetic>
+          <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
+            <Magnetic className="inline-block">
+              <a
+                href="#contact"
+                className="rounded-full border hairline px-5 py-2 font-sans text-sm text-content transition-colors hover:bg-content hover:text-surface"
+              >
+                Let’s talk
+              </a>
+            </Magnetic>
+          </div>
 
-          <button
-            aria-label="Toggle menu"
-            onClick={() => setOpen((o) => !o)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-          >
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              aria-label="Toggle menu"
+              onClick={() => setOpen((o) => !o)}
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+            >
             <span
               className={`h-px w-6 bg-content transition-transform duration-300 ${
                 open ? "translate-y-[3.5px] rotate-45" : ""
@@ -90,7 +96,8 @@ export default function Nav() {
                 open ? "-translate-y-[3.5px] -rotate-45" : ""
               }`}
             />
-          </button>
+            </button>
+          </div>
         </div>
         <div className="container-editorial">
           <div className="h-px w-full bg-content/10">

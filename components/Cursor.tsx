@@ -26,10 +26,14 @@ export default function Cursor() {
       dyTo(e.clientY);
     };
 
-    const grow = () =>
-      gsap.to(ring, { scale: 2.4, borderColor: "#2563EB", duration: 0.3 });
-    const shrink = () =>
-      gsap.to(ring, { scale: 1, borderColor: "rgba(15,30,56,0.35)", duration: 0.3 });
+    const grow = () => {
+      ring.classList.add("is-active");
+      gsap.to(ring, { scale: 2.4, duration: 0.3 });
+    };
+    const shrink = () => {
+      ring.classList.remove("is-active");
+      gsap.to(ring, { scale: 1, duration: 0.3 });
+    };
 
     window.addEventListener("mousemove", move);
 
@@ -54,8 +58,7 @@ export default function Cursor() {
     <div className="pointer-events-none fixed inset-0 z-[9999] hidden md:block">
       <div
         ref={ringRef}
-        className="absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border"
-        style={{ borderColor: "rgba(15,30,56,0.35)" }}
+        className="cursor-ring absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full"
       />
       <div
         ref={dotRef}

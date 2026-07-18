@@ -14,7 +14,7 @@ export default function Contact() {
         className="pointer-events-none absolute bottom-[-30%] left-1/2 -z-10 h-[60vw] w-[60vw] -translate-x-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(96,165,250,0.22) 0%, transparent 65%)",
+            "radial-gradient(circle, rgb(var(--accent-soft) / 0.22) 0%, transparent 65%)",
           filter: "blur(30px)",
         }}
       />

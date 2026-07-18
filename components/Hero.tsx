@@ -73,7 +73,7 @@ export default function Hero() {
         className="hero-glow pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[70vw] w-[70vw] -translate-x-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(96,165,250,0.28) 0%, rgba(37,99,235,0.10) 40%, transparent 70%)",
+            "radial-gradient(circle, rgb(var(--accent-soft) / 0.30) 0%, rgb(var(--accent) / 0.10) 40%, transparent 70%)",
           filter: "blur(20px)",
         }}
       />

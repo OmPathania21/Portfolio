@@ -177,7 +177,7 @@ export default function SkillGlobe() {
               className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(96,165,250,0.20), transparent 70%)",
+                  "radial-gradient(circle, rgb(var(--accent-soft) / 0.22), transparent 70%)",
                 filter: "blur(12px)",
               }}
             />

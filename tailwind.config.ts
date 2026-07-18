@@ -8,24 +8,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light, airy blue backgrounds & raised surfaces
+        // Driven by CSS variables so light/dark themes can swap the palette.
+        // Values are RGB channel triplets — see app/globals.css.
         surface: {
-          DEFAULT: "#D8E7FA", // page background (soft sky blue — clearly tinted)
-          800: "#F4F9FF", // cards / raised panels (lighter, lifts off the bg)
-          700: "#C7DBF5", // subtle bands / deeper tint
-          600: "#A9C4EC", // borders / scrollbar
+          DEFAULT: "rgb(var(--surface) / <alpha-value>)",
+          800: "rgb(var(--surface-800) / <alpha-value>)",
+          700: "rgb(var(--surface-700) / <alpha-value>)",
+          600: "rgb(var(--surface-600) / <alpha-value>)",
         },
-        // Ink text on light
         content: {
-          DEFAULT: "#0F1E38", // primary text (deep navy)
-          soft: "#41506A", // secondary text
-          dim: "#55627A", // muted labels & meta
+          DEFAULT: "rgb(var(--content) / <alpha-value>)",
+          soft: "rgb(var(--content-soft) / <alpha-value>)",
+          dim: "rgb(var(--content-dim) / <alpha-value>)",
         },
-        // Blue accent + lighter sky tone
         accent: {
-          DEFAULT: "#2563EB",
-          soft: "#60A5FA",
-          deep: "#1D4ED8",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          soft: "rgb(var(--accent-soft) / <alpha-value>)",
+          deep: "rgb(var(--accent-deep) / <alpha-value>)",
         },
       },
       fontFamily: {

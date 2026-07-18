@@ -24,6 +24,7 @@ export default function LampGate() {
   const root = useRef<HTMLDivElement>(null);
   const glow = useRef<HTMLDivElement>(null);
   const lamp = useRef<SVGGElement>(null);
+  const anchor = useRef<HTMLDivElement>(null);
   const chain = useRef<HTMLDivElement>(null);
   const knob = useRef<HTMLButtonElement>(null);
 
@@ -85,54 +86,113 @@ export default function LampGate() {
     }
   };
 
-  /* ---------- pull-switch drag ---------- */
+  /* ---------- pull-switch: free-swinging string (pendulum physics) ---------- */
   useEffect(() => {
+    const a = anchor.current;
+    const s = chain.current;
     const k = knob.current;
-    const c = chain.current;
-    if (!k || !c) return;
+    if (!a || !s || !k) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const BASE = 66;
-    const MAX = 78;
-    const THRESHOLD = 42;
-    let startY: number | null = null;
-    let dy = 0;
+    const L = 66; // rest length
+    const MAXR = 150; // how far the string can be stretched
+    const THRESH = 40; // pull distance from rest that flips the switch
+    const K = 0.03; // gravity (pendulum restoring)
+    const ANG_DAMP = 0.02; // swing damping
+    const R_STIFF = 0.2; // string springiness (length)
+    const R_DAMP = 0.5;
 
-    // gentle idle sway to invite interaction
-    const idle = gsap.to(c, {
-      rotate: 4,
-      transformOrigin: "top center",
-      duration: 1.5,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-    });
+    let mode: "idle" | "drag" | "sim" = "idle";
+    let theta = 0; // angle from straight-down (radians)
+    let r = L; // current length
+    let omega = 0; // angular velocity
+    let vr = 0; // radial velocity
+    let lastR = L;
+    let maxDisp = 0;
+    let t0 = performance.now();
+    let raf = 0;
+
+    const setString = (th: number, rad: number) => {
+      s.style.height = rad + "px";
+      s.style.transform = `rotate(${(th * 180) / Math.PI}deg)`;
+    };
 
     const down = (e: PointerEvent) => {
-      startY = e.clientY;
-      idle.pause();
-      gsap.set(c, { rotate: 0 });
-      k.setPointerCapture(e.pointerId);
+      e.preventDefault();
+      mode = "drag";
+      maxDisp = 0;
+      lastR = r;
+      try {
+        k.setPointerCapture(e.pointerId);
+      } catch {}
     };
     const move = (e: PointerEvent) => {
-      if (startY === null) return;
-      dy = Math.max(0, Math.min(MAX, e.clientY - startY));
-      gsap.set(c, { height: BASE + dy });
+      if (mode !== "drag") return;
+      const rect = a.getBoundingClientRect();
+      const dx = e.clientX - rect.left;
+      const dy = e.clientY - rect.top;
+      const raw = Math.hypot(dx, dy);
+      const newR = Math.min(MAXR, raw);
+      const newTheta = Math.atan2(-dx, Math.max(dy, 0.001));
+      omega = newTheta - theta; // carry release momentum
+      vr = newR - lastR;
+      lastR = newR;
+      theta = newTheta;
+      r = newR;
+      const disp = Math.hypot(dx, dy - L); // distance from the resting position
+      if (disp > maxDisp) maxDisp = disp;
+      setString(theta, r);
     };
     const up = () => {
-      if (startY === null) return;
-      const pulled = dy;
-      startY = null;
-      dy = 0;
-      gsap.to(c, { height: BASE, duration: 0.7, ease: "elastic.out(1,0.4)" });
-      if (pulled > THRESHOLD) setLight(!onRef.current);
-      else if (!onRef.current) idle.play();
+      if (mode !== "drag") return;
+      if (maxDisp > THRESH) setLight(!onRef.current);
+      if (reduce) {
+        theta = 0;
+        r = L;
+        setString(0, L);
+        mode = "idle";
+        t0 = performance.now();
+        return;
+      }
+      mode = "sim";
+    };
+
+    const loop = () => {
+      if (mode === "idle") {
+        const amp = reduce ? 0 : onRef.current ? 0.02 : 0.055;
+        const t = (performance.now() - t0) / 1000;
+        theta = amp * Math.sin(t * 1.3);
+        r = L;
+        setString(theta, r);
+      } else if (mode === "sim") {
+        // pendulum swing + string length spring
+        omega += -K * Math.sin(theta) - ANG_DAMP * omega;
+        theta += omega;
+        vr += (L - r) * R_STIFF - R_DAMP * vr;
+        r += vr;
+        setString(theta, r);
+        if (
+          Math.abs(omega) < 0.002 &&
+          Math.abs(theta) < 0.012 &&
+          Math.abs(vr) < 0.06 &&
+          Math.abs(r - L) < 0.6
+        ) {
+          theta = 0;
+          r = L;
+          setString(0, L);
+          mode = "idle";
+          t0 = performance.now();
+        }
+      }
+      raf = requestAnimationFrame(loop);
     };
 
     k.addEventListener("pointerdown", down);
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
+    raf = requestAnimationFrame(loop);
     return () => {
-      idle.kill();
+      cancelAnimationFrame(raf);
       k.removeEventListener("pointerdown", down);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
@@ -265,23 +325,32 @@ export default function LampGate() {
               </g>
             </svg>
 
-            {/* pull switch (HTML overlay, lines up with socket) */}
+            {/* pull switch — free-swinging string anchored at the lamp socket */}
             <div
-              className="absolute flex flex-col items-center"
-              style={{ left: 176, top: 158 }}
+              ref={anchor}
+              className="absolute"
+              style={{ left: 168, top: 158, width: 0, height: 0 }}
             >
-              <div ref={chain} className="w-px bg-white/30" style={{ height: 66 }} />
-              <button
-                ref={knob}
-                aria-label={on ? "Pull to switch the lamp off" : "Pull to switch the lamp on"}
-                className="lamp-knob -mt-1 h-5 w-5 cursor-grab touch-none rounded-full active:cursor-grabbing"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setLight(!onRef.current);
+              <div
+                ref={chain}
+                className="absolute left-0 top-0 w-px bg-white/30"
+                style={{ height: 66, transformOrigin: "top center" }}
+              >
+                <button
+                  ref={knob}
+                  aria-label={
+                    on ? "Pull to switch the lamp off" : "Pull to switch the lamp on"
                   }
-                }}
-              />
+                  className="lamp-knob absolute left-1/2 h-5 w-5 -translate-x-1/2 cursor-grab touch-none rounded-full active:cursor-grabbing"
+                  style={{ bottom: -10 }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setLight(!onRef.current);
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
 

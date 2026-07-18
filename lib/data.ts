@@ -7,8 +7,8 @@ export const profile = {
   email: "oompathania@gmail.com",
   phone: "+91 9351161254",
   links: {
-    github: "https://github.com/", // TODO: replace with your GitHub URL
-    linkedin: "https://www.linkedin.com/", // TODO: replace with your LinkedIn URL
+    github: "https://github.com/OmPathania21", // TODO: replace with your GitHub URL
+    linkedin: "https://www.linkedin.com/in/om-pathania-001592300/", // TODO: replace with your LinkedIn URL
   },
   summary:
     "Computer Science undergraduate with hands-on experience in Python development and open-source software engineering. Passionate about building engineering applications and AI-driven technologies while continuously learning and contributing to impactful projects.",

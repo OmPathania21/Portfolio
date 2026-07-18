@@ -197,9 +197,14 @@ export default function SkillGlobe() {
                   className={`absolute left-0 top-0 whitespace-nowrap rounded-full border px-3 py-1 font-sans text-sm transition-colors duration-200 will-change-transform ${
                     active === i
                       ? "border-accent bg-accent text-surface"
-                      : "border-content/15 bg-surface-800/60 text-content-soft hover:text-content"
+                      : "border-content/12 bg-surface-800/45 text-content-soft hover:text-content"
                   }`}
-                  style={{ backdropFilter: "blur(2px)" }}
+                  style={{
+                    backdropFilter: "blur(6px) saturate(150%)",
+                    WebkitBackdropFilter: "blur(6px) saturate(150%)",
+                    boxShadow:
+                      active === i ? "none" : "inset 0 1px 0 rgb(255 255 255 / 0.15)",
+                  }}
                 >
                   {s.name}
                 </button>

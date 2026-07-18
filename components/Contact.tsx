@@ -41,7 +41,7 @@ export default function Contact() {
           <Magnetic strength={0.3}>
             <a
               href={`mailto:${profile.email}`}
-              className="group inline-flex items-center gap-4 rounded-full border hairline px-8 py-5 font-sans text-lg text-content transition-colors hover:bg-content hover:text-surface"
+              className="glass group inline-flex items-center gap-4 rounded-full px-8 py-5 font-sans text-lg text-content transition-colors hover:bg-content hover:text-surface"
             >
               {profile.email}
               <span className="transition-transform group-hover:translate-x-1">

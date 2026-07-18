@@ -44,7 +44,7 @@ export default function Nav() {
     <>
       <header
         ref={bar}
-        className="fixed inset-x-0 top-0 z-[900] opacity-0"
+        className="glass-nav fixed inset-x-0 top-0 z-[900] opacity-0"
       >
         <div className="container-editorial flex items-center justify-between py-5">
           <a
@@ -72,7 +72,7 @@ export default function Nav() {
             <Magnetic className="inline-block">
               <a
                 href="#contact"
-                className="rounded-full border hairline px-5 py-2 font-sans text-sm text-content transition-colors hover:bg-content hover:text-surface"
+                className="glass rounded-full px-5 py-2 font-sans text-sm text-content transition-colors hover:bg-content hover:text-surface"
               >
                 Let’s talk
               </a>
@@ -111,7 +111,7 @@ export default function Nav() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-[899] flex flex-col items-center justify-center gap-8 bg-surface-800 transition-all duration-500 md:hidden ${
+        className={`glass fixed inset-0 z-[899] flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"

@@ -32,7 +32,7 @@ export default function ThemeToggle({
     <button
       onClick={toggle}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-      className={`relative flex h-10 w-10 items-center justify-center rounded-full border hairline text-content transition-colors hover:bg-content/5 ${className}`}
+      className={`glass relative flex h-10 w-10 items-center justify-center rounded-full text-content transition-colors hover:bg-content/5 ${className}`}
     >
       {/* render nothing until mounted to avoid a mismatched icon flash */}
       <span

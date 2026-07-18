@@ -275,7 +275,12 @@ export default function LampGate() {
                 ref={knob}
                 aria-label={on ? "Pull to switch the lamp off" : "Pull to switch the lamp on"}
                 className="lamp-knob -mt-1 h-5 w-5 cursor-grab touch-none rounded-full active:cursor-grabbing"
-                onClick={() => setLight(!onRef.current)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setLight(!onRef.current);
+                  }
+                }}
               />
             </div>
           </div>

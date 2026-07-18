@@ -2,7 +2,7 @@ export const profile = {
   name: "Om Pathania",
   role: "Computer Science Undergraduate",
   tagline:
-    "Building Python, open-source, and AI-driven software — from steel-bridge CAD engines to pathfinding visualizers.",
+    "I turn hard problems into software you can see move — one week it's a steel-bridge CAD engine, the next it's watching an algorithm think its way across a maze.",
   location: "Nagrota Surian, Himachal Pradesh, India",
   email: "oompathania@gmail.com",
   phone: "+91 9351161254",
@@ -29,9 +29,9 @@ export const experience: Experience[] = [
     period: "May 2026 — Present",
     place: "IIT Bombay",
     points: [
-      "Contributing to OsdagBridge, an open-source plugin for Osdag used to design and analyse steel plate girder bridges.",
-      "Developed and enhanced Python-based 3D CAD generation modules for accurate modeling and visualization of bridge components.",
-      "Collaborated with the team to ship new features, resolve bugs, and maintain code quality using Git and open-source practices.",
+      "Writing code that helps engineers design real steel plate-girder bridges — inside OsdagBridge, an open-source plugin for the Osdag project.",
+      "Building the Python engine that turns bridge parameters into accurate 3D CAD models you can inspect from every angle.",
+      "Living the open-source workflow: shipping features, hunting bugs, and keeping the codebase clean through Git and honest code review.",
     ],
   },
   {
@@ -39,8 +39,8 @@ export const experience: Experience[] = [
     role: "Events Advisor",
     period: "Sep 2025 — Present",
     points: [
-      "Advised and coordinated the planning and execution of Hackcelerate, ensuring smooth operations.",
-      "Structured problem statements and evaluation processes aligned with real-world innovation challenges.",
+      "Helped run Hackcelerate end to end — keeping a room full of hackers, mentors, and deadlines moving in sync.",
+      "Shaped the problem statements and judging criteria so teams solved challenges that actually matter in the real world.",
     ],
   },
   {
@@ -48,8 +48,8 @@ export const experience: Experience[] = [
     role: "Technical Member",
     period: "Sep 2025 — Present",
     points: [
-      "Participated in hands-on cloud labs and technical workshops.",
-      "Collaborated on project-based learning sessions to sharpen development skills.",
+      "Getting hands dirty in cloud labs and workshops — learning infrastructure by breaking and rebuilding it.",
+      "Trading ideas in project-based sessions where the fastest way to learn is to build alongside other people.",
     ],
   },
 ];
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     kind: "Industrial Research",
     period: "Mar 2026 — Present",
     blurb:
-      "Designing and simulating photonic quantum circuits for room-temperature computation using linear optical components. Implementing and evaluating quantum gate operations on photon-based qubits — focused on interference, fidelity, and noise analysis for scalable systems.",
+      "What if a quantum computer didn't need to be frozen near absolute zero? I'm simulating photonic circuits that compute with light at room temperature — modelling how photon qubits interfere, how faithfully gates behave, and how much noise a scalable design can survive.",
     stack: ["Python", "Quantum Optics", "Simulation"],
   },
   {
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     kind: "AI Healthcare Platform",
     period: "Mar 2026 — Apr 2026",
     blurb:
-      "A responsive React frontend for an AI-powered healthcare triage and medical assistant system — integrated lab-test booking, billing, payment simulation, booking confirmation, live dashboard updates, and hospital-side report delivery.",
+      "A calm front door to a stressful moment. This React app walks a patient from 'something feels wrong' to an AI triage answer, a booked lab test, a paid bill, and a report waiting at the hospital — the whole journey simulated end to end, live on one dashboard.",
     stack: ["React", "AI", "Responsive UI"],
   },
   {
@@ -88,7 +88,7 @@ export const projects: Project[] = [
     kind: "Algorithm Visualizer",
     period: "Apr 2026 — May 2026",
     blurb:
-      "An interactive laboratory for exploring how AI 'thinks' about space and navigation. Transforms abstract pathfinding algorithms into high-speed visual animations — making visible the trade-offs between speed, memory, and accuracy.",
+      "Pathfinding algorithms are usually invisible math. PathMind puts them on stage — you watch A*, Dijkstra and friends race across a grid in real time and finally see the trade-off they're all quietly making between speed, memory, and the perfect route.",
     stack: ["Algorithms", "Visualization", "JavaScript"],
   },
 ];

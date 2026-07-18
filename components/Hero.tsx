@@ -87,10 +87,10 @@ export default function Hero() {
 
       <div className="container-editorial">
         <h1 className="hero-title font-serif font-light leading-[0.85] tracking-tightest text-content">
-          <span className="block overflow-hidden text-[22vw] md:text-[16vw] lg:text-[15rem]">
+          <span className="block overflow-hidden text-[15vw] md:text-[11vw] lg:text-[9rem]">
             {renderChars(line1)}
           </span>
-          <span className="block overflow-hidden text-[22vw] md:text-[16vw] lg:text-[15rem]">
+          <span className="block overflow-hidden text-[15vw] md:text-[11vw] lg:text-[9rem]">
             {renderChars(line2, true)}
           </span>
         </h1>

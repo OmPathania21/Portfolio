@@ -50,7 +50,7 @@ function ProjectRow({
       </div>
 
       <div className="md:col-span-5">
-        <h3 className="font-serif text-3xl font-light leading-tight text-content transition-transform duration-500 group-hover:translate-x-3 md:text-5xl">
+        <h3 className="font-serif text-2xl font-light leading-tight text-content transition-transform duration-500 group-hover:translate-x-3 md:text-4xl">
           {title}
         </h3>
         <p className="mt-3 font-sans text-sm uppercase tracking-[0.2em] text-accent">
@@ -91,7 +91,7 @@ export default function Work() {
         <SplitReveal
           text="Selected Work"
           as="h2"
-          className="font-serif text-5xl font-light leading-none text-content md:text-8xl"
+          className="font-serif text-4xl font-light leading-none text-content md:text-6xl"
         />
         <p className="max-w-xs font-sans text-sm text-content-dim">
           A cross-section of research, product, and systems work — from quantum

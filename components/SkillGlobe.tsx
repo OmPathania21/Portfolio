@@ -146,7 +146,7 @@ export default function SkillGlobe() {
           <SplitReveal
             text="A world of tools"
             as="h2"
-            className="font-serif text-5xl font-light leading-none text-content md:text-8xl"
+            className="font-serif text-4xl font-light leading-none text-content md:text-6xl"
           />
         </div>
         <p className="font-sans text-sm text-content-dim md:col-span-4">

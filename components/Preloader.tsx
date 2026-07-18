@@ -62,14 +62,14 @@ export default function Preloader() {
       </div>
 
       <div className="overflow-hidden">
-        <div className="pl-word font-serif text-[15vw] font-light leading-none text-content md:text-[10vw]">
+        <div className="pl-word font-serif text-[11vw] font-light leading-none text-content md:text-[7vw]">
           Crafting
         </div>
       </div>
 
       <div className="flex items-end justify-between">
         <div className="overflow-hidden">
-          <div className="pl-word font-serif text-[15vw] font-light italic leading-none text-accent md:text-[10vw]">
+          <div className="pl-word font-serif text-[11vw] font-light italic leading-none text-accent md:text-[7vw]">
             software.
           </div>
         </div>

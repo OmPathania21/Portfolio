@@ -28,12 +28,12 @@ export default function Contact() {
         <SplitReveal
           text="Let’s build something"
           as="h2"
-          className="font-serif text-[13vw] font-light leading-[0.9] tracking-tightest text-content md:text-[8vw]"
+          className="font-serif text-[9vw] font-light leading-[0.9] tracking-tightest text-content md:text-[5.5vw]"
         />
         <SplitReveal
           text="worth remembering."
           as="h2"
-          className="font-serif text-[13vw] font-light italic leading-[0.9] tracking-tightest text-accent md:text-[8vw]"
+          className="font-serif text-[9vw] font-light italic leading-[0.9] tracking-tightest text-accent md:text-[5.5vw]"
           delay={0.15}
         />
 

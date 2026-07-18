@@ -51,7 +51,7 @@ export default function Marquee() {
         {row.map((t, i) => (
           <span
             key={i}
-            className="mx-8 flex items-center gap-8 font-serif text-4xl font-light text-content-soft md:text-6xl"
+            className="mx-8 flex items-center gap-8 font-serif text-2xl font-light text-content-soft md:text-4xl"
           >
             {t}
             <span className="text-accent">✦</span>

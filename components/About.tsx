@@ -26,7 +26,7 @@ export default function About() {
           <SplitReveal
             text={philosophy}
             as="p"
-            className="font-serif text-2xl font-light leading-[1.35] text-content md:text-4xl md:leading-[1.3]"
+            className="font-serif text-xl font-light leading-[1.4] text-content md:text-3xl md:leading-[1.35]"
             stagger={0.012}
           />
 

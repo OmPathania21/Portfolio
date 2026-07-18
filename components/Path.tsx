@@ -15,7 +15,7 @@ export default function Path() {
         <SplitReveal
           text="Experience & education"
           as="h2"
-          className="mb-20 font-serif text-5xl font-light leading-[0.95] text-content md:text-8xl"
+          className="mb-20 font-serif text-4xl font-light leading-[0.95] text-content md:text-6xl"
         />
 
         {/* Experience */}

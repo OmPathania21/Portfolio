@@ -9,8 +9,8 @@ import ThemeToggle from "./ThemeToggle";
 gsap.registerPlugin(ScrollTrigger);
 
 const links = [
-  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
+  { label: "Work", href: "#work" },
   { label: "Path", href: "#path" },
   { label: "Contact", href: "#contact" },
 ];

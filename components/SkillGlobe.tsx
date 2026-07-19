@@ -2,10 +2,68 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import type { IconType } from "react-icons";
+import {
+  SiPython,
+  SiCplusplus,
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiQt,
+  SiNumpy,
+  SiPandas,
+  SiHtml5,
+  SiCss,
+  SiTailwindcss,
+  SiGreensock,
+  SiMysql,
+  SiMongodb,
+  SiGit,
+  SiLinux,
+  SiOpensourceinitiative,
+} from "react-icons/si";
+import {
+  FaJava,
+  FaDatabase,
+  FaChartLine,
+  FaSitemap,
+  FaCubes,
+  FaBrain,
+  FaAtom,
+} from "react-icons/fa";
 import { SplitReveal } from "./anim";
 import { globeSkills } from "@/lib/data";
 
 type Pt = { x: number; y: number; z: number };
+
+// each tool → its logo + brand colour (tuned to read on a white tile)
+const ICONS: Record<string, { Icon: IconType; color: string }> = {
+  Python: { Icon: SiPython, color: "#3776AB" },
+  Java: { Icon: FaJava, color: "#E76F00" },
+  "C++": { Icon: SiCplusplus, color: "#00599C" },
+  JavaScript: { Icon: SiJavascript, color: "#C79A00" },
+  SQL: { Icon: FaDatabase, color: "#4479A1" },
+  React: { Icon: SiReact, color: "#087EA4" },
+  "Next.js": { Icon: SiNextdotjs, color: "#111111" },
+  PySide6: { Icon: SiQt, color: "#41CD52" },
+  NumPy: { Icon: SiNumpy, color: "#013243" },
+  Pandas: { Icon: SiPandas, color: "#150458" },
+  Matplotlib: { Icon: FaChartLine, color: "#11557C" },
+  HTML: { Icon: SiHtml5, color: "#E34F26" },
+  CSS: { Icon: SiCss, color: "#1572B6" },
+  Tailwind: { Icon: SiTailwindcss, color: "#0891B2" },
+  GSAP: { Icon: SiGreensock, color: "#5C8A00" },
+  MySQL: { Icon: SiMysql, color: "#4479A1" },
+  MongoDB: { Icon: SiMongodb, color: "#3FA037" },
+  Git: { Icon: SiGit, color: "#F05032" },
+  "Open Source": { Icon: SiOpensourceinitiative, color: "#3DA639" },
+  Linux: { Icon: SiLinux, color: "#111111" },
+  DSA: { Icon: FaSitemap, color: "#6366F1" },
+  OOP: { Icon: FaCubes, color: "#8B5CF6" },
+  DBMS: { Icon: FaDatabase, color: "#0EA5E9" },
+  "Machine Learning": { Icon: FaBrain, color: "#EF4444" },
+  "Quantum Optics": { Icon: FaAtom, color: "#7C3AED" },
+};
 
 export default function SkillGlobe() {
   const wrap = useRef<HTMLDivElement>(null);
@@ -184,31 +242,35 @@ export default function SkillGlobe() {
 
             {/* skill chips */}
             <div className="absolute left-1/2 top-1/2 h-0 w-0">
-              {globeSkills.map((s, i) => (
-                <button
-                  key={s.name}
-                  ref={(n) => {
-                    nodes.current[i] = n;
-                  }}
-                  onMouseEnter={() => enter(i)}
-                  onMouseLeave={() => setActive(null)}
-                  onFocus={() => enter(i)}
-                  onBlur={() => setActive(null)}
-                  className={`absolute left-0 top-0 whitespace-nowrap rounded-full border px-3 py-1 font-sans text-sm transition-colors duration-200 will-change-transform ${
-                    active === i
-                      ? "border-accent bg-accent text-surface"
-                      : "border-content/12 bg-surface-800/45 text-content-soft hover:text-content"
-                  }`}
-                  style={{
-                    backdropFilter: "blur(6px) saturate(150%)",
-                    WebkitBackdropFilter: "blur(6px) saturate(150%)",
-                    boxShadow:
-                      active === i ? "none" : "inset 0 1px 0 rgb(255 255 255 / 0.15)",
-                  }}
-                >
-                  {s.name}
-                </button>
-              ))}
+              {globeSkills.map((s, i) => {
+                const entry = ICONS[s.name] ?? { Icon: FaCubes, color: "#6366F1" };
+                const Icon = entry.Icon;
+                return (
+                  <button
+                    key={s.name}
+                    aria-label={s.name}
+                    ref={(n) => {
+                      nodes.current[i] = n;
+                    }}
+                    onMouseEnter={() => enter(i)}
+                    onMouseLeave={() => setActive(null)}
+                    onFocus={() => enter(i)}
+                    onBlur={() => setActive(null)}
+                    className={`absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-2xl border will-change-transform ${
+                      active === i ? "border-accent" : "border-black/10"
+                    }`}
+                    style={{
+                      background: "#ffffff",
+                      boxShadow:
+                        active === i
+                          ? "0 10px 24px rgba(0,0,0,0.28)"
+                          : "0 4px 12px rgba(0,0,0,0.16)",
+                    }}
+                  >
+                    <Icon size={26} color={entry.color} />
+                  </button>
+                );
+              })}
 
               {/* tooltip */}
               <div

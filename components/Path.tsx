@@ -1,7 +1,7 @@
 "use client";
 
 import { SplitReveal, FadeUp } from "./anim";
-import { experience, education, certifications } from "@/lib/data";
+import { experience } from "@/lib/data";
 
 export default function Path() {
   return (
@@ -13,7 +13,7 @@ export default function Path() {
         </div>
 
         <SplitReveal
-          text="Experience & education"
+          text="Where I’ve been building"
           as="h2"
           className="mb-20 font-serif text-4xl font-light leading-[0.95] text-content md:text-6xl"
         />
@@ -50,51 +50,6 @@ export default function Path() {
             </FadeUp>
           ))}
           <div className="border-t hairline" />
-        </div>
-
-        {/* Education + Certs */}
-        <div className="mt-24 grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-7">
-            <h3 className="mb-8 font-sans text-xs uppercase tracking-[0.2em] text-accent">
-              Education
-            </h3>
-            <div className="space-y-8">
-              {education.map((ed) => (
-                <FadeUp key={ed.school} className="border-l hairline pl-6">
-                  <h4 className="font-serif text-xl font-light text-content">
-                    {ed.school}
-                  </h4>
-                  <p className="mt-1 font-sans text-sm text-content-soft">
-                    {ed.detail} · {ed.period}
-                    {ed.place ? ` · ${ed.place}` : ""}
-                  </p>
-                  {ed.note ? (
-                    <p className="mt-2 font-sans text-sm text-content-dim">
-                      {ed.note}
-                    </p>
-                  ) : null}
-                </FadeUp>
-              ))}
-            </div>
-          </div>
-
-          <div className="md:col-span-5">
-            <h3 className="mb-8 font-sans text-xs uppercase tracking-[0.2em] text-accent">
-              Certifications
-            </h3>
-            <ul className="space-y-4">
-              {certifications.map((c) => (
-                <FadeUp
-                  key={c}
-                  as="li"
-                  className="flex gap-4 font-sans text-base text-content-soft"
-                >
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                  {c}
-                </FadeUp>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </section>

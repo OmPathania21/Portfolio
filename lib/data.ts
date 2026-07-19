@@ -84,7 +84,7 @@ export const projects: Project[] = [
   },
   {
     index: "03",
-    title: "Ai-Patha-Finder — PathMind",
+    title: "Ai-Path-Finder — PathMind",
     kind: "Algorithm Visualizer",
     period: "Apr 2026 — May 2026",
     blurb:
@@ -140,25 +140,3 @@ export const skills: { group: string; items: string[] }[] = [
   },
 ];
 
-export const education = [
-  {
-    school: "SRM Institute of Science and Technology (SRMIST)",
-    detail: "B.Tech in Computer Science",
-    period: "Expected 2028",
-    place: "Chennai, India",
-    note: "Coursework: DSA, OOP, DBMS, Operating Systems, Machine Learning, Engineering Physics.",
-  },
-  {
-    school: "Himalayan Public School",
-    detail: "Higher Secondary",
-    period: "2024",
-    place: "Nagrota Bagwan",
-    note: "",
-  },
-];
-
-export const certifications = [
-  "NPTEL — Data Structures & Algorithms using Java",
-  "NPTEL — Programming in Java",
-  "NPTEL — Introduction to Operating Systems",
-];

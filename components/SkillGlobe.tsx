@@ -99,7 +99,12 @@ export default function SkillGlobe() {
     let tvx = vx;
     let tvy = vy;
 
+    let dragging = false;
+    let lastX = 0;
+    let lastY = 0;
+
     const onMove = (e: MouseEvent) => {
+      if (dragging) return; // while grabbing, drag drives rotation
       const r = el.getBoundingClientRect();
       const nx = (e.clientX - r.left) / r.width - 0.5;
       const ny = (e.clientY - r.top) / r.height - 0.5;
@@ -110,8 +115,37 @@ export default function SkillGlobe() {
       tvx = 0.0006;
       tvy = 0.0022;
     };
+
+    // grab to spin the globe anywhere
+    const onDown = (e: PointerEvent) => {
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      setActive(null);
+      el.setPointerCapture?.(e.pointerId);
+    };
+    const onDrag = (e: PointerEvent) => {
+      if (!dragging) return;
+      const k = 0.007;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      // globe follows the cursor: drag right → surface moves right
+      ay += -dx * k;
+      ax += -dy * k;
+      vy = -dx * k; // carry momentum for release inertia
+      vx = -dy * k;
+    };
+    const onUp = () => {
+      dragging = false;
+    };
+
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
+    el.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointermove", onDrag);
+    window.addEventListener("pointerup", onUp);
 
     let raf = 0;
     const render = () => {
@@ -119,13 +153,16 @@ export default function SkillGlobe() {
       const R = Math.min(r.width, r.height) * 0.42;
       const frozen = activeRef.current !== null;
 
-      // ease velocity toward target (or toward 0 while a chip is focused)
-      const goalX = frozen ? 0 : tvx;
-      const goalY = frozen ? 0 : tvy;
-      vx += (goalX - vx) * 0.05;
-      vy += (goalY - vy) * 0.05;
-      ax += vx;
-      ay += vy;
+      // while grabbed, the pointer drives rotation directly (see onDrag);
+      // otherwise ease velocity toward the idle/steer target with inertia
+      if (!dragging) {
+        const goalX = frozen ? 0 : tvx;
+        const goalY = frozen ? 0 : tvy;
+        vx += (goalX - vx) * 0.05;
+        vy += (goalY - vy) * 0.05;
+        ax += vx;
+        ay += vy;
+      }
 
       const cosY = Math.cos(ay),
         sinY = Math.sin(ay);
@@ -177,6 +214,9 @@ export default function SkillGlobe() {
       cancelAnimationFrame(raf);
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("mouseleave", onLeave);
+      el.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onDrag);
+      window.removeEventListener("pointerup", onUp);
     };
   }, []);
 
@@ -218,17 +258,31 @@ export default function SkillGlobe() {
         <div className="md:col-span-8">
           <div
             ref={wrap}
-            className="relative mx-auto aspect-square w-full max-w-[620px]"
+            className="relative mx-auto aspect-square w-full max-w-[620px] cursor-grab touch-none active:cursor-grabbing"
           >
-            {/* backdrop rings */}
+            {/* backdrop globe wireframe */}
             <svg
-              className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
+              className="pointer-events-none absolute inset-0 h-full w-full"
               viewBox="0 0 100 100"
               aria-hidden="true"
             >
-              <circle cx="50" cy="50" r="42" className="stroke-accent/25" strokeWidth="0.15" fill="none" />
-              <ellipse cx="50" cy="50" rx="42" ry="15" className="stroke-content/10" strokeWidth="0.15" fill="none" />
-              <ellipse cx="50" cy="50" rx="15" ry="42" className="stroke-content/10" strokeWidth="0.15" fill="none" />
+              {/* outline */}
+              <circle
+                cx="50"
+                cy="50"
+                r="42"
+                className="stroke-accent/60"
+                strokeWidth="0.4"
+                fill="none"
+              />
+              {/* latitude lines */}
+              <ellipse cx="50" cy="50" rx="42" ry="10" className="stroke-content/25" strokeWidth="0.3" fill="none" />
+              <ellipse cx="50" cy="50" rx="42" ry="24" className="stroke-content/20" strokeWidth="0.3" fill="none" />
+              <ellipse cx="50" cy="50" rx="42" ry="37" className="stroke-content/15" strokeWidth="0.3" fill="none" />
+              {/* longitude lines */}
+              <ellipse cx="50" cy="50" rx="10" ry="42" className="stroke-content/25" strokeWidth="0.3" fill="none" />
+              <ellipse cx="50" cy="50" rx="24" ry="42" className="stroke-content/20" strokeWidth="0.3" fill="none" />
+              <ellipse cx="50" cy="50" rx="37" ry="42" className="stroke-content/15" strokeWidth="0.3" fill="none" />
             </svg>
             {/* center glow */}
             <div

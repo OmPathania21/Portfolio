@@ -14,12 +14,15 @@ export const profile = {
     "Computer Science undergraduate with hands-on experience in Python development and open-source software engineering. Passionate about building engineering applications and AI-driven technologies while continuously learning and contributing to impactful projects.",
 };
 
+export type LanyardVariant = "srm" | "qwiklabs" | "ssit";
+
 export type Experience = {
   org: string;
   role: string;
   period: string;
   place?: string;
   points: string[];
+  lanyard: LanyardVariant;
 };
 
 export const experience: Experience[] = [
@@ -28,6 +31,7 @@ export const experience: Experience[] = [
     role: "Software Engineering Intern",
     period: "May 2026 — Present",
     place: "IIT Bombay",
+    lanyard: "srm",
     points: [
       "Writing code that helps engineers design real steel plate-girder bridges — inside OsdagBridge, an open-source plugin for the Osdag project.",
       "Building the Python engine that turns bridge parameters into accurate 3D CAD models you can inspect from every angle.",
@@ -38,6 +42,7 @@ export const experience: Experience[] = [
     org: "IEEE SSIT",
     role: "Events Advisor",
     period: "Sep 2025 — Present",
+    lanyard: "ssit",
     points: [
       "Helped run Hackcelerate end to end — keeping a room full of hackers, mentors, and deadlines moving in sync.",
       "Shaped the problem statements and judging criteria so teams solved challenges that actually matter in the real world.",
@@ -47,6 +52,7 @@ export const experience: Experience[] = [
     org: "Qwiklabs Developer Club",
     role: "Technical Member",
     period: "Sep 2025 — Present",
+    lanyard: "qwiklabs",
     points: [
       "Getting hands dirty in cloud labs and workshops — learning infrastructure by breaking and rebuilding it.",
       "Trading ideas in project-based sessions where the fastest way to learn is to build alongside other people.",

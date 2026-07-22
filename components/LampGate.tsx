@@ -46,9 +46,24 @@ export default function LampGate() {
   };
 
   useEffect(() => {
+    // On refresh the browser restores the previous scroll position. Combined
+    // with the gate's scroll lock that would trap the viewer mid-page with no
+    // way to reach the lamp — so always start at the top instead.
+    const prev = history.scrollRestoration;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     lock();
+
+    // re-assert, in case the browser restores after this effect runs
+    const t1 = setTimeout(() => window.scrollTo(0, 0), 0);
+    const t2 = setTimeout(() => window.scrollTo(0, 0), 150);
+
     return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = prev ?? "auto";
+      }
       unlock();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
